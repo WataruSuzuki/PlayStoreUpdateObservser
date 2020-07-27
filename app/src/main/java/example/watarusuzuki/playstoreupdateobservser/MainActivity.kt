@@ -27,9 +27,12 @@ class MainActivity : AppCompatActivity() {
                     .setAction("Action", null).show()
         }
 
-        val filter = IntentFilter()
-        filter.addAction(Intent.ACTION_PACKAGE_REPLACED)
-        filter.addDataScheme("package")
+        val filter = IntentFilter().apply {
+            addAction(Intent.ACTION_PACKAGE_ADDED)
+            addAction(Intent.ACTION_PACKAGE_CHANGED)
+            addAction(Intent.ACTION_PACKAGE_REPLACED)
+            addDataScheme("package")
+        }
         registerReceiver(receiver, filter)
     }
 
